@@ -31,7 +31,7 @@ def login
 
     # skip responses we're not interested in
     init_response = $connection.waitfor("gs_initialized")
-    puts "Logged in successfully"
+    puts Time.now.inspect + " Logged in successfully"
 
     # now we've got to request the DBs to behave
     # more like the real client we're emulating
@@ -41,19 +41,19 @@ def login
         # read server response and ignore it
         $connection.read
     end
-    puts "DBs requested"
+    puts Time.now.inspect + " DBs requested"
 
     # Get promos and quests and ignore them
     $connection.write(Protocol.getSimpleNamedRequest("gs_promos", Protocol.getSimpleLongPayload("last_updated", 0)))
     2.times { $connection.read }
     $connection.write(Protocol.getSimpleNamedRequest("gs_quest", Protocol.getSimpleLongPayload("last_updated", 0)))
     $connection.read
-    puts "Fetched promos and quests"
+    puts Time.now.inspect + " Fetched promos and quests"
 
     # Request player object
     $connection.write(Protocol.getSimpleNamedRequest("gs_player", Protocol.getSimpleLongPayload("last_updated", 0)))
     $state.updateFromPlayerObject($connection.read["p"]["p"]["player_object"])
-    puts "State updated from player object"
+    puts Time.now.inspect + " State updated from player object"
 end
 
 def collect
@@ -67,11 +67,11 @@ def collect
             fail "Failed to change active island" unless change_resp["p"]["p"]["success"] == 1
             $state.active_island = id
         end
-        puts "Collecting from active island: #{island.name}"
+        puts Time.now.inspect + " Collecting from active island: #{island.name}"
 
         island.baking.each do |id, baking|
             if baking.finished < Time.now.to_i * 1000
-                puts "Baking #{id} finished at #{Util::unixToString(baking.finished)}"
+                puts Time.now.inspect + " Baking #{id} finished at #{Util::unixToString(baking.finished)}"
                 sleep rand(1..4)
                 if baking.finish
                     if $state.coins >= 75000
@@ -79,7 +79,7 @@ def collect
                     end
                 end
             else
-                puts "Baking #{id} not finished yet. Finish: #{Util::unixToString(baking.finished)}"
+                puts Time.now.inspect + " Baking #{id} not finished yet. Finish: #{Util::unixToString(baking.finished)}"
             end
         end
         shuffled_monsters = Hash[island.monsters.to_a.shuffle]
@@ -87,7 +87,7 @@ def collect
             sleep rand(1..4)
             monster.collect
         end
-        puts "Collected from all monsters"
+        puts Time.now.inspect + " Collected from all monsters"
     end
 end
 

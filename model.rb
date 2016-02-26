@@ -75,7 +75,7 @@ module Model
         end
 
         def genericSuccessPropsRequest(name, payload)
-            print "Sending #{name} request... "
+            print Time.now.inspect + " Sending #{name} request... "
             @state.connection.write(Protocol.getSimpleNamedRequest(name, payload))
 
             response = @state.connection.waitfor(name)
@@ -113,13 +113,13 @@ module Model
         end
 
         def finish
-            puts "Collecting baking: #{user_id}, #{food_count}... "
+            puts Time.now.inspect + " Collecting baking: #{user_id}, #{food_count}... "
             genericSuccessPropsRequest("gs_finish_baking",
                 Protocol.getSimpleLongPayload("user_baking_id", user_id))
         end
 
         def start(food_index)
-            puts "Restart baking #{food_index} on structure #{@user_structure.user_id}"
+            puts Time.now.inspect + " Restart baking #{food_index} on structure #{@user_structure.user_id}"
             genericSuccessPropsRequest("gs_start_baking",
                 Protocol.getStartBakingPayload(food_index, @user_structure.user_id))
         end
@@ -167,7 +167,7 @@ module Model
         @last_collection = 0
 
         def collect
-            puts "Collecting from: #{user_id}"
+            puts Time.now.inspect + " Collecting from: #{user_id}"
             success = genericSuccessPropsRequest("gs_collect_monster",
                 Protocol.getSimpleLongPayload("user_monster_id", user_id))
 
