@@ -1,5 +1,7 @@
 require 'httparty'
+require 'haml'
 require_relative 'settings'
+
 
 class BBBAuth
   include HTTParty

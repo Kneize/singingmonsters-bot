@@ -1,4 +1,5 @@
 require 'yaml'
+require 'haml'
 
 CONFIG_FILE = "config.yml"
 

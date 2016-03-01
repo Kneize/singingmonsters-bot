@@ -1,6 +1,7 @@
 require 'bindata'
 require 'zlib'
 require 'stringio'
+require 'haml'
 
 module SmartFox2X
     TYPE_BOOL   = 1

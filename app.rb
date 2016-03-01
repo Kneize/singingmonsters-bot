@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'haml'
 
 require_relative 'proto'
 require_relative 'auth'

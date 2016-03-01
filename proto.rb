@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'haml'
 require_relative 'smartfox'
 
 class Protocol
