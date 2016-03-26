@@ -15,7 +15,7 @@ class Protocol
         login.merge({"un" => user, "zn" => "MySingingMonsters", "pw" => Digest::MD5.hexdigest(tk + password)})
         client_info = SmartFox2X::SFSObject.new
         client_info.merge({"client_device" => "D821", "client_os" => "6.0.1",
-            "client_platform" => "android", "client_version" => "1.3.8", "last_update_version" => "1.3.8",
+            "client_platform" => "android", "client_version" => "1.4.0", "last_update_version" => "1.4.0",
             "last_updated" => SmartFox2X::Term.build(SmartFox2X::TYPE_LONG, 1441712026000)})
         login["p"] = client_info
         SmartFox2X::SFSPacket.build(login, 1, 0)

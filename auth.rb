@@ -15,7 +15,7 @@ class BBBAuth
       :t => "bbb",
       :g => 1,
       :lang => "en",
-      :client_version => "1.3.8",
+      :client_version => $settings.client_version,
       #:oudid => $settings.oudid,
       :dev => $settings.device,
       :os => $settings.os,
